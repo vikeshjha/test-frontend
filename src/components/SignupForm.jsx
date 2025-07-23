@@ -2,26 +2,29 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 
-//done
+// Add this missing line
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 const SignupForm = () => {
-
     const[form, setForm] = useState({ name: '', password: ''})
     const[msg, setMsg] = useState('');
 
     const handleChange = (e) =>{
         setForm({...form , [e.target.name]: e.target.value});
     };
+    
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try{
-            const res = await axios.post(`${API_URL}/signup`, form);
-
+            // Update to match your backend endpoint
+            const res = await axios.post(`${API_URL}/api/signup`, form);
             setMsg(res.data.message);
         }catch (err) {
+            console.error('Error details:', err); // Add for debugging
             setMsg("Error creating user");
         }
     };
+    
   return (
     <div>
         <h2>Sign Up</h2>
