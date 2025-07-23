@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
 
 const SignupForm = () => {
 
@@ -15,7 +15,8 @@ const SignupForm = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault();
         try{
-            const res = await axios.post('http://localhost:5000/signup', form);
+            const res = await axios.post(`${API_URL}/signup`, form);
+
             setMsg(res.data.message);
         }catch (err) {
             setMsg("Error creating user");
